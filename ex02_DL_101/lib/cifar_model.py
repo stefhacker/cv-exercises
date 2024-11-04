@@ -31,7 +31,7 @@ class ConvModel(nn.Module):
         # 3) Averagepooling (nn.AvgPool2d) with kernel size 16, stride 16.
         # 4) Linear layer (nn.Linear) with input_features=2 * num_filters, output_features=10.
         self.conv1 = nn.Conv2d(in_channels=input_channels, out_channels=num_filters, kernel_size=3, stride=2, padding=1)
-        self.batch1 = nn.BatchNorm2d(num_features=num_filters)
+        self.batch1 = nn.BatchNorm2d(num_features=num_filters) #normaloze output to 0 mean and 1 std deviation
         self.relu1 = nn.ReLU()
         self.conv2 = nn.Conv2d(in_channels=num_filters, out_channels=2* num_filters, kernel_size=3, stride=1, padding=1)
         self.batch2 = nn.BatchNorm2d(num_features=2 * num_filters)

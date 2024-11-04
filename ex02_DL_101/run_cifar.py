@@ -70,7 +70,7 @@ def main():
 
     # Create the loss function (nn.CrossEntropyLoss)
     # START TODO #################
-    loss_fn = nn.CrossEntropyLoss()
+    loss_fn = nn.CrossEntropyLoss() #evaluates probability distribution of prediction compared to actual class
     
     # END TODO ###################
 
