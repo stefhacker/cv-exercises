@@ -21,17 +21,17 @@ def convolve2D(image, kernel, padding=0, strides=1):
 
     # Shape of Output Convolution
     # START TODO ###################
-    # xOutput =
-    # yOutput = 
-    raise NotImplementedError
+    output_x_shape = (image_x_shape + kernel_x_shape + 2 * padding) // strides + 1 
+    output_y_shape = (image_y_shape + kernel_y_shape + 2 * padding) // strides + 1 
+    
     # END TODO ###################
     output = np.zeros((output_y_shape, output_x_shape))
 
     # Apply Equal Padding to All Sides
     if padding != 0:
         # START TODO ###################
-        # imagePadded = 
-        raise NotImplementedError
+        imagePadded = np.pad(image, padding, mode = 'constant', constant_values = 0)
+        
         # END TODO ###################
     else:
         image_padded = image
