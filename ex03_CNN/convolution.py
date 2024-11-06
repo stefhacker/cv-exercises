@@ -21,8 +21,8 @@ def convolve2D(image, kernel, padding=0, strides=1):
 
     # Shape of Output Convolution
     # START TODO ###################
-    output_x_shape = (image_x_shape + kernel_x_shape + 2 * padding) // strides + 1 
-    output_y_shape = (image_y_shape + kernel_y_shape + 2 * padding) // strides + 1 
+    output_x_shape = ((image_x_shape + kernel_x_shape + 2 * padding) // strides) + 1 
+    output_y_shape = ((image_y_shape + kernel_y_shape + 2 * padding) // strides) + 1 
     
     # END TODO ###################
     output = np.zeros((output_y_shape, output_x_shape))
@@ -30,7 +30,7 @@ def convolve2D(image, kernel, padding=0, strides=1):
     # Apply Equal Padding to All Sides
     if padding != 0:
         # START TODO ###################
-        imagePadded = np.pad(image, padding, mode = 'constant', constant_values = 0)
+        image_padded = np.pad(image, ((padding, padding), (padding, padding)), mode = 'constant', constant_values = 0)
         
         # END TODO ###################
     else:
@@ -42,7 +42,9 @@ def convolve2D(image, kernel, padding=0, strides=1):
     for y in range(kernel_up, image_padded.shape[0], strides):
         # START TODO ###################
         # Exit Convolution before y is out of bounds
-        raise NotImplementedError
+        if y + kernel_up >= image_padded.shape[0]:
+            continue
+        x_out = -1
         # END TODO ###################
 
         # START TODO ###################
@@ -50,7 +52,17 @@ def convolve2D(image, kernel, padding=0, strides=1):
         # position the center of the kernel at x,y
         # and save the sum of the elementwise multiplication
         # to the corresponding pixel in the output image
-        raise NotImplementedError
+        for x in range(kernel_left, image_padded.shape[1], strides):
+            
+            if x + kernel_left >= image_padded.shape[1]:
+                continue
+                
+            output[y_out][x_out]= np.sum(kernel * image_padded[y - kernel_up:y + kernel_down, 
+                                                               x - kernel_left:x + kernel_right])
+            x_out = x_out + 1
+
+        y_out = y_out + 1
+
         # END TODO ###################
     return output
 
