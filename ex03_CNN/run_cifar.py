@@ -145,14 +145,16 @@ def main():
 
     # START TODO #################
     # initialize the SummaryWriter with a log directory in args.out_dir/logs
-    # tb_writer = 
-    raise NotImplementedError
+    log_dir = os.path.join(args.out_dir, 'logs')
+    writer = SummaryWriter(log_dir=log_dir) 
+
+   
     # END TODO #################
 
     # START TODO #################
     # get the transforms and pass them to the dataset
-    # train_transforms, val_transforms = ...
-    raise NotImplementedError
+    train_transforms, val_transforms = get_transforms(args=args)
+    
     # END TODO #################
 
     # create dataloaders
@@ -221,7 +223,9 @@ def main():
                                                     args, device)
             # START TODO ###################
             # add_scalar train_loss and train_acc to tb_writer
-            raise NotImplementedError
+            writer.add_scalar('Loss/train', train_loss, epoch)
+            writer.add_scalar('Accuracy/train', train_acc, epoch)
+            
             # END TODO ###################
 
         # iterate over the val set to compute the accuracy
@@ -230,7 +234,9 @@ def main():
               f"Loss {val_loss:.6f} accuracy {val_acc:.2%}")
         # START TODO #################
         # add_scalar val_loss and val_acc to tb_writer
-        raise NotImplementedError
+        writer.add_scalar('Loss/val', val_loss, epoch)
+        writer.add_scalar('Accuracy/val', val_acc, epoch)
+        
         # END TODO ###################
         print(f"---------- End of epoch {epoch + 1}")
 
@@ -247,7 +253,9 @@ def main():
     # START TODO #################
     # add_scalar test_loss and test_acc to tb_writer
     # ideally, you'd remember the model with the best validation performance and test on that
-    raise NotImplementedError
+    writer.add_scalar('Loss/test', test_loss, epoch)
+    writer.add_scalar('Accuracy/test', test_acc, epoch)
+       
     # END TODO ###################
 
 
@@ -258,7 +266,7 @@ if __name__ == '__main__':
     # train the network for 256 epochs
     # use the flag --transforms basic, and specify out_dir as 'no_augment'
     # --- do not put code here ---
-    raise NotImplementedError
+    
     # END TODO ###################
 
     # START TODO ###################
