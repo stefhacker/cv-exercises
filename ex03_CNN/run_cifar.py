@@ -24,14 +24,18 @@ def get_transforms(args):
         # use torchvision.transforms.Compose to compose our custom augmentations
         # horizontal_flip, random_resize_crop, ToTensor, Normalize
         # you can play around with the parameters
-        # train_transforms=
-        raise NotImplementedError
+        train_transforms= torchvision.transforms.Compose(
+                )
         # END TODO #################
     elif args.transforms == 'torchvision':
         # START TODO #################
         # achieve the same as above with torchvision transforms
         # compare your own implementation against theirs
-        raise NotImplementedError
+         train_transforms= torchvision.transforms.Compose(
+                [torchvision.transforms.RandomHorizontalFlip(),
+                 torchvision.transforms.RandomResizedCrop((32, 32), scale=(1.0, 1.0), ratio=(1.0, 1.0)),
+                 torchvision.transforms.ToTensor(),
+                 torchvision.transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
         # END TODO #################
     else:
         raise ValueError(f"Unknown transform {args.transforms}")
@@ -272,7 +276,7 @@ if __name__ == '__main__':
     # START TODO ###################
     # train the network a second time with the flag --transforms own and the out_dir 'augment'
     # --- do not put code here ---
-    raise NotImplementedError
+    
     # END TODO ###################
 
     # START TODO ###################
